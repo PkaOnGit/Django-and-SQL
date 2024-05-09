@@ -1,0 +1,12 @@
+{% extends "form/style.html" %}
+
+{% block body %}
+    <h1>Add Task</h1>
+    <form action="{% url 'form:add' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type = "text" name = "form">
+        <input type = "submit">
+    </form>
+    <a href = "{% url 'form:start' %}">View Tasks</a>
+{% endblock %}
