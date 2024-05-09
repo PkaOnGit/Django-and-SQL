@@ -9,17 +9,17 @@ def index(request):
         "flight": Flight.objects.all()
     })
 
-def flight(request, flight_id):
+def flights(request, flight_id):
     flight = Flight.objects.get(pk=flight_id)
     return render(request, "flight/flight.html",{
         "flight": flight,
-        "Passengers": flight.passengers.all(),
-        "non_passengers": Passenger.objects.exclude(flight = flight).all
+        "passengers": flight.passengers.all(),
+        "non_passengers": Passenger.objects.exclude(flights = flight).all
     })
 
 def book(request, flight_id):
     if request.method == "POST":
         flight = Flight.objects.get(pk=flight_id)
-        passenger = Passenger.objects.get(pk=int(request.POST["passenger"]))
-        passenger.flight.add(flight)
+        passenger = Passenger.objects.get(pk=int(request.post["passengers"]))
+        passenger.flights.add(flights)
         return HttpResponseRedirect(reverse("flight", args=(flight.id,)))
